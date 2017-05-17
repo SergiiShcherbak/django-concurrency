@@ -7,8 +7,10 @@ from django.core.urlresolvers import get_callable
 from concurrency.config import conf
 from concurrency.exceptions import RecordModifiedError
 
+from django.utils.deprecation import MiddlewareMixin
 
-class ConcurrencyMiddleware(object):
+
+class ConcurrencyMiddleware(MiddlewareMixin):
     """ Intercept :ref:`RecordModifiedError` and invoke a callable defined in
     :setting:`CONCURRECY_HANDLER409` passing the request and the object.
 
