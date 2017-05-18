@@ -3,12 +3,13 @@ from __future__ import absolute_import, unicode_literals
 
 from django.core.signals import got_request_exception
 from django.core.urlresolvers import get_callable
+from django.utils.deprecation import MiddlewareMixin
 
 from concurrency.config import conf
 from concurrency.exceptions import RecordModifiedError
 
 
-class ConcurrencyMiddleware(object):
+class ConcurrencyMiddleware(MiddlewareMixin):
     """ Intercept :ref:`RecordModifiedError` and invoke a callable defined in
     :setting:`CONCURRECY_HANDLER409` passing the request and the object.
 
